@@ -7,9 +7,9 @@ const
     app = express().use(bodyParser.json()); // creates express http server
 
 
-app.get('/', ((req, res) => {
-    res.json('Hello');
-}))
+// app.get('/', ((req, res) => {
+//     res.json('Hello');
+// }))
 
 // Creates the endpoint for our webhook 
 app.post('/webhook', (req, res) => {
@@ -41,7 +41,7 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
 
     // Your verify token. Should be a random string.
-    let VERIFY_TOKEN = "<Dennis_Token>"
+    let VERIFY_TOKEN = "<YOUR_VERIFY_TOKEN>"
 
     // Parse the query params
     let mode = req.query['hub.mode'];
