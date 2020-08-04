@@ -9,7 +9,8 @@ const
     app = express().use(bodyParser.json()), // creates express http server
     PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN,
     PORT = process.env.PORT || 1337,
-    translate = require('./translate')
+    { translate } = require('./translate');
+
 
 app.get('/', ((req, res) => {
     res.send(
@@ -139,7 +140,6 @@ app.get('/webhook', (req, res) => {
         }
     }
 });
-
 
 
 
