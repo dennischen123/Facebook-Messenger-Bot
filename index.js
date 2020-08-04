@@ -31,9 +31,10 @@ function handleMessage(sender_psid, received_message) {
 
         // translate(input, fromLangCode, toLangCode,)
         let translatedResponse = translate(received_message.text, 'en', 'zh');
+        console.log(translatedResponse);
         response = {
-            "text": translatedResponse
-                // "text": `You sent the message: "${received_message.text}". Now send me an image!`
+            // "text": translatedResponse
+            "text": `You sent the message: "${received_message.text}". Now send me an image!`
         }
     }
 
