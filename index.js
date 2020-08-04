@@ -7,11 +7,15 @@ const
     express = require('express'),
     bodyParser = require('body-parser'),
     app = express().use(bodyParser.json()), // creates express http server
-    PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+    PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN,
+    PORT = process.env.PORT || 1337,
+    translate = require('./translate')
 
-// app.get('/', ((req, res) => {
-//     res.json('Hello');
-// }))
+app.get('/', ((req, res) => {
+    res.json(
+        `<h1>Translate Buddy</h1>`
+    );
+}))
 
 
 // Handles messages events
@@ -23,8 +27,12 @@ function handleMessage(sender_psid, received_message) {
     if (received_message.text) {
 
         // Create the payload for a basic text message
+
+        // translate(input, fromLangCode, toLangCode,)
+        let translatedResponse = translate(receieved_message.text, 'en', 'zh');
         response = {
-            "text": `You sent the message: "${received_message.text}". Now send me an image!`
+            "text": translatedResponse
+                // "text": `You sent the message: "${received_message.text}". Now send me an image!`
         }
     }
 
@@ -137,4 +145,4 @@ app.get('/webhook', (req, res) => {
 
 
 // Sets server port and logs message on success
-app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+app.listen(PORT, () => console.log(`webhook is listenin on port ${PORT}`));
