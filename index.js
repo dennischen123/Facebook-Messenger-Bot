@@ -12,7 +12,7 @@ const
     translate = require('./translate')
 
 app.get('/', ((req, res) => {
-    res.json(
+    res.send(
         `<h1>Translate Buddy</h1>`
     );
 }))
@@ -29,7 +29,7 @@ function handleMessage(sender_psid, received_message) {
         // Create the payload for a basic text message
 
         // translate(input, fromLangCode, toLangCode,)
-        let translatedResponse = translate(receieved_message.text, 'en', 'zh');
+        let translatedResponse = translate(received_message.text, 'en', 'zh');
         response = {
             "text": translatedResponse
                 // "text": `You sent the message: "${received_message.text}". Now send me an image!`
