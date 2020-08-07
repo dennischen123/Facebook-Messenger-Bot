@@ -1,6 +1,6 @@
 require('dotenv').config();
 const fetch = require("node-fetch");
-
+const RAPID_API_KEY = process.env.RAPID_API_KEY
 const url = "https://systran-systran-platform-for-language-processing-v1.p.rapidapi.com/translation/text/translate?source='en'&target='zh'&input=hello"
 
 const translate = (async(input, fromLangCode, toLangCode) => {
@@ -8,7 +8,7 @@ const translate = (async(input, fromLangCode, toLangCode) => {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "systran-systran-platform-for-language-processing-v1.p.rapidapi.com",
-            "x-rapidapi-key": process.env.RAPID_API_KEY,
+            "x-rapidapi-key": RAPID_API_KEY,
             "useQueryString": true
         }
     })
