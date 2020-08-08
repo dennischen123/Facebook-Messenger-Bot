@@ -8,7 +8,8 @@ const bodyParser = require('body-parser');
 const app = express().use(bodyParser.json());
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
 const PORT = process.env.PORT || 1337;
-const translate = require('./translate');
+const { translate } = require('./translate');
+
 
 
 app.get('/', ((req, res) => {
@@ -17,28 +18,28 @@ app.get('/', ((req, res) => {
     );
 }))
 
-
 // Handles messages events
 async function handleMessage(sender_psid, received_message) {
+    try {
+        // Check if the message contains text
+        if (received_message.text) {
+            // Create the payload for a basic text message
 
-    let response;
-
-    // Check if the message contains text
-    if (received_message.text) {
-
-        // Create the payload for a basic text message
-
-        // translate(input, fromLangCode, toLangCode,)
-        let translatedResponse = await translate(received_message.text, 'en', 'zh');
-        let translated = await translatedResponse.json();
-        console.log(translatedResponse);
-        response = {
-            // "text": translatedResponse
-            "text": `Translation: "${translated}" .`
+            // translate(input, fromLangCode, toLangCode,)
+            let translatedResponse = await translate(received_message.text, 'en', 'zh');
+            let translated = await translatedResponse.json();
+            console.log(translated.outputs[0].output);
+            let response = {
+                // "text": translatedResponse
+                "text": `Translation: "${translated.outputs[0].output}" .`
+            }
         }
+        callSendAPI(sender_psid, response);
+    } catch (error) {
+        console.log(error)
     }
 
-    callSendAPI(sender_psid, response);
+
 }
 
 // Handles messaging_postbacks events

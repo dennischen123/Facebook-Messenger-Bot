@@ -15,6 +15,7 @@ const translate = (async(input, fromLangCode, toLangCode) => {
     return results;
 });
 
+
 module.exports = {
     translate
 }
