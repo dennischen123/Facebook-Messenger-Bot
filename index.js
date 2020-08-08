@@ -78,6 +78,7 @@ async function handleMessage(sender_psid, received_message) {
     try {
         let response;
         let setupStatus = false;
+        console.log(setupStatus);
         // Check if the message contains text
         if (received_message.text == 'setup') {
             response = handleSetup(response);
