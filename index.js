@@ -79,7 +79,7 @@ async function handleMessage(sender_psid, received_message) {
         let response;
         let setupStatus = false;
         // Check if the message contains text
-        if (received_message.text.toLowerCase() == 'setup') {
+        if (received_message.text == 'setup') {
             response = handleSetup(response);
         } else if (received_message.text && setupStatus) {
             // Create the payload for a basic text message
