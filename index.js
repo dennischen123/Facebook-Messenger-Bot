@@ -21,6 +21,7 @@ app.get('/', ((req, res) => {
 // Handles messages events
 async function handleMessage(sender_psid, received_message) {
     try {
+        let response;
         // Check if the message contains text
         if (received_message.text) {
             // Create the payload for a basic text message
@@ -29,7 +30,7 @@ async function handleMessage(sender_psid, received_message) {
             let translatedResponse = await translate(received_message.text, 'en', 'zh');
             let translated = await translatedResponse.json();
             console.log(translated.outputs[0].output);
-            let response = {
+            response = {
                 // "text": translatedResponse
                 "text": `Translation: "${translated.outputs[0].output}" .`
             }
